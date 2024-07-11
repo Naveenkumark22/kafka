@@ -1,0 +1,32 @@
+{
+  "name": "pricing-profile-source-connector13",
+  "config": {
+    "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
+    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "transforms": "ValueToKey,ExtractField",
+    "errors.log.enable": "true",
+    "errors.log.include.messages": "true",
+    "transforms.ValueToKey.type": "org.apache.kafka.connect.transforms.ValueToKey",
+    "transforms.ValueToKey.fields": "ADMIN_CLIENT_ID",
+    "transforms.ExtractField.type": "org.apache.kafka.connect.transforms.ExtractField$Key",
+    "transforms.ExtractField.field": "ADMIN_CLIENT_ID",
+    "connection.url": "jdbc:oracle:thin:@//10.36.137.96:2349/PRCP2",
+    "connection.user": "mdm_usr",
+    "connection.password": "Jq9v5#XP7$t",
+    "numeric.mapping": "none",
+    "dialect.name": "OracleDatabaseDialect",
+	"mode": "incrementing",
+    "incrementing.column.name": "CONT_EQUIV_ID",
+	"mode": "timestamp+incrementing",
+    "timestamp.column.name": "LAST_UPDATE_DT",
+    "validate.non.null": "false",
+    "query": "SELECT * FROM MDM_USR.svw_cdc_acc_internal_kafka",
+    "table.types": "VIEW",
+    "poll.interval.ms": "10000",
+    "topic.prefix": "jdbc-topic005",
+    "timestamp.delay.interval.ms": "500",
+    "batch.size": "1000",
+    "value.converter.schemas.enable": "true"
+  }
+}
